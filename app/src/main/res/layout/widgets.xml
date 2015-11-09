@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="top"
+    android:orientation="vertical">
+
+    <ViewFlipper
+        android:id="@+id/viewFlipper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textViewFPS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:gravity="end"
+                android:text="@string/fps"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/textViewColors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textViewFPS"
+                android:minHeight="16dp"
+                android:text="Colors"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:maxWidth="@android:dimen/notification_large_icon_height"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textViewColors"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:text="Set Parameters" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TableLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:stretchColumns="0">
+
+                <TableRow>
+
+                    <SeekBar
+                        android:id="@+id/seekBarR"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="9"
+                        android:background="@android:color/holo_red_light"
+                        android:labelFor="@string/red" />
+
+                    <TextView
+                        android:id="@+id/barLabelR"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="1dp"
+                        android:text="red"
+                        android:background="@android:color/holo_red_light"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+                </TableRow>
+
+                <TableRow>
+
+                    <!--android:layout_width="0dip"-->
+                    <SeekBar
+                        android:id="@+id/seekBarG"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="9"
+                        android:background="@android:color/holo_green_light"
+                        android:labelFor="@string/green" />
+
+                    <TextView
+                        android:id="@+id/barLabelG"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="1dp"
+                        android:text="green"
+                        android:background="@android:color/holo_green_light"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+                </TableRow>
+
+                <TableRow>
+
+                    <SeekBar
+                        android:id="@+id/seekBarB"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="9"
+                        android:background="@android:color/holo_blue_light"
+                        android:labelFor="@string/blue" />
+
+                    <TextView
+                        android:id="@+id/barLabelB"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="1dp"
+                        android:text="blue"
+                        android:background="@android:color/holo_blue_light"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+                </TableRow>
+            </TableLayout>
+
+            <Button
+                android:id="@+id/buttonBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="Back" />
+
+        </LinearLayout>
+
+    </ViewFlipper>
+
+</RelativeLayout>
