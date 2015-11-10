@@ -106,34 +106,9 @@ public:
      */
     void LoadResources() {
         LOGI("LoadResources");
-        init();
-    }
-
-    /**
-     * Unload resources
-     */
-    void UnloadResources() {
-        LOGI("UnloadResources");
-//        renderer_.Unload();
-    }
-
-    AAssetManager* getAssetManager() {
-        JNIEnv *jni;
-        app_->activity->vm->AttachCurrentThread(&jni, NULL);
-        jclass clazz = jni->GetObjectClass(app_->activity->clazz);
-        LOGI("attached Thread for %p",clazz);
-        jmethodID methodIDgAM = jni->GetMethodID(clazz, "getAssetManager", "()Landroid/content/res/AssetManager;");
-        jobject assetManager = jni->CallObjectMethod(app_->activity->clazz, methodIDgAM);
-        AAssetManager *localAssetManager = AAssetManager_fromJava(jni, assetManager);
-        app_->activity->vm->DetachCurrentThread();
-        LOGI("detached Thread for AM J:%p C:%p", assetManager, localAssetManager);
-        return localAssetManager;
-    }
-
-    // take the AAssetManager from Java Env via JNI call
-    void init() {
+        // take the AAssetManager from Java Env via JNI call
         AAssetManager *assetManager = getAssetManager();
-        LOGI("init(", assetManager ,")");
+        LOGI("init(", assetManager, ")");
         AAsset *vertexShaderAsset = AAssetManager_open(assetManager, "shader.glslv",
                                                        AASSET_MODE_BUFFER);
         assert(vertexShaderAsset != NULL);
@@ -160,6 +135,32 @@ public:
         //-------------------------------------------------------------------------
 
         generateXPos();
+
+    }
+
+    /**
+     * Unload resources
+     */
+    void UnloadResources() {
+        LOGI("UnloadResources");
+//        renderer_.Unload();
+    }
+
+    /**
+     * get handle from java for assetmanager
+     */
+    AAssetManager *getAssetManager() {
+        JNIEnv *jni;
+        app_->activity->vm->AttachCurrentThread(&jni, NULL);
+        jclass clazz = jni->GetObjectClass(app_->activity->clazz);
+        LOGI("attached Thread for %p", clazz);
+        jmethodID methodIDgAM = jni->GetMethodID(clazz, "getAssetManager",
+                                                 "()Landroid/content/res/AssetManager;");
+        jobject assetManager = jni->CallObjectMethod(app_->activity->clazz, methodIDgAM);
+        AAssetManager *localAssetManager = AAssetManager_fromJava(jni, assetManager);
+        app_->activity->vm->DetachCurrentThread();
+        LOGI("detached Thread for AM J:%p C:%p", assetManager, localAssetManager);
+        return localAssetManager;
     }
 
 
@@ -182,12 +183,12 @@ public:
         int enableSensorResult = ASensorEventQueue_enableSensor(accelerometerSensorEventQueue,
                                                                 accelerometerSensor);
         assert(enableSensorResult >= 0);
-   }
+    }
 
     void ProcessSensors(int32_t id) {
         // If a sensor has data, process it now.
         if (id == LOOPER_ID_USER) {
-            int i=5;
+            int i = 5;
             if (accelerometerSensor != NULL) {
                 update();
 //                ASensorEvent event;
@@ -323,9 +324,9 @@ public:
         return;
     }
 
-   /**
- * Just the current frame in the display.
- */
+    /**
+  * Just the current frame in the display.
+  */
     double lasttime;
 
     void DrawFrame() {
@@ -414,7 +415,7 @@ public:
  * Process the next input event.
  */
     static int32_t HandleInput(android_app *app,
-                                AInputEvent *event) {
+                               AInputEvent *event) {
         SensorGraph *eng = (SensorGraph *) app->userData;
         if (AInputEvent_getType(event) == AINPUT_EVENT_TYPE_MOTION) {
             ndk_helper::GESTURE_STATE doubleTapState = eng->doubletap_detector_.Detect(event);
@@ -582,6 +583,7 @@ public:
             colorfade[i] = GetProgressValue(i) / 100.f;
         }
     }
+
     void TrimMemory() {
         LOGI("Trimming memory");
         gl_context_->Invalidate();

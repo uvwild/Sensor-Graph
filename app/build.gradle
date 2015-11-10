@@ -36,7 +36,7 @@ model {
 
         ldLibs += ["android", "EGL", "GLESv2", "dl", "log"]
 //        ldLibs += ["log", "GLESv2", "android"]
-        stl     = "stlport_static"
+        stl = "stlport_static"
 //        stl = "c++_static"
     }
 
@@ -84,8 +84,11 @@ model {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.0.1'
-    compile 'com.google.android.gms:play-services:+'
+    compile 'com.android.support:appcompat-v7:23.1.0'
+    compile 'com.google.android.gms:play-services:8.1.0'
+    compile 'com.google.android.gms:play-services-ads:8.1.0'
+    compile 'com.google.android.gms:play-services-identity:8.1.0'
+    compile 'com.google.android.gms:play-services-gcm:8.1.0'
 }
 //dependencies {
 //    compile 'com.firebase:firebase-client-android:2.3.1'

@@ -21,7 +21,7 @@ import android.annotation.TargetApi;
 import android.app.NativeActivity;
 import android.content.Intent;
 import android.content.res.AssetManager;
-import android.opengl.GLSurfaceView;
+//import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -41,7 +41,7 @@ public class SensorGraphNativeActivity extends NativeActivity {
 
     private static final String TAG = "SensorGraphNtvActivity";
     int count = 0;
-    GLSurfaceView mView;
+    //    GLSurfaceView mView;
     SensorGraphNativeActivity _activity;
 
 //    @Override protected void onPause() {
