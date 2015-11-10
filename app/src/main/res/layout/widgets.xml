@@ -41,11 +41,11 @@
             <Button
                 android:id="@+id/button"
                 android:layout_width="wrap_content"
-                android:maxWidth="@android:dimen/notification_large_icon_height"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/textViewColors"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
+                android:maxWidth="@android:dimen/notification_large_icon_height"
                 android:text="Set Parameters" />
         </RelativeLayout>
 
@@ -71,10 +71,10 @@
                     <TextView
                         android:id="@+id/barLabelR"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_marginLeft="1dp"
-                        android:text="red"
+                        android:layout_weight="1"
                         android:background="@android:color/holo_red_light"
+                        android:text="red"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
                 </TableRow>
 
@@ -91,10 +91,10 @@
                     <TextView
                         android:id="@+id/barLabelG"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_marginLeft="1dp"
-                        android:text="green"
+                        android:layout_weight="1"
                         android:background="@android:color/holo_green_light"
+                        android:text="green"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
                 </TableRow>
 
@@ -110,10 +110,10 @@
                     <TextView
                         android:id="@+id/barLabelB"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_marginLeft="1dp"
-                        android:text="blue"
+                        android:layout_weight="1"
                         android:background="@android:color/holo_blue_light"
+                        android:text="blue"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
                 </TableRow>
             </TableLayout>
@@ -124,6 +124,13 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:text="Back" />
+
+            <Button
+                android:id="@+id/buttonShowMAP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="MAP" />
 
         </LinearLayout>
 

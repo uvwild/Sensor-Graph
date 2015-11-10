@@ -19,6 +19,7 @@ package com.android.sensorgraph;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.NativeActivity;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
@@ -38,10 +39,36 @@ import android.widget.ViewFlipper;
 
 public class SensorGraphNativeActivity extends NativeActivity {
 
-    int count = 0;
     private static final String TAG = "SensorGraphNtvActivity";
-
+    int count = 0;
     GLSurfaceView mView;
+    SensorGraphNativeActivity _activity;
+
+//    @Override protected void onPause() {
+//        super.onPause();
+//        mView.onPause();
+//        mView.queueEvent(new Runnable() {
+//            @Override
+//            public void run() {
+//                SensorGraphJNI.pause();
+//            }
+//        });
+//    }
+PopupWindow _popupWindow;
+    TextView _label;
+
+//    @Override protected void onResume() {
+//        super.onResume();
+//        mView.onResume();
+//        mView.queueEvent(new Runnable() {
+//            @Override
+//            public void run() {
+//                SensorGraphJNI.resume();
+//            }
+//        });
+//    }
+TextView _bottomLine;
+    ViewFlipper _viewFlipper;
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -89,17 +116,6 @@ public class SensorGraphNativeActivity extends NativeActivity {
 //	    setContentView(mView);
     }
 
-//    @Override protected void onPause() {
-//        super.onPause();
-//        mView.onPause();
-//        mView.queueEvent(new Runnable() {
-//            @Override
-//            public void run() {
-//                SensorGraphJNI.pause();
-//            }
-//        });
-//    }
-
     protected void onPause() {
         super.onPause();
         if (_popupWindow != null) {
@@ -124,17 +140,6 @@ public class SensorGraphNativeActivity extends NativeActivity {
 
     }
 
-//    @Override protected void onResume() {
-//        super.onResume();
-//        mView.onResume();
-//        mView.queueEvent(new Runnable() {
-//            @Override
-//            public void run() {
-//                SensorGraphJNI.resume();
-//            }
-//        });
-//    }
-
     @TargetApi(19)
     void setImmersiveSticky() {
         View decorView = getWindow().getDecorView();
@@ -145,12 +150,6 @@ public class SensorGraphNativeActivity extends NativeActivity {
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
     }
-
-    SensorGraphNativeActivity _activity;
-    PopupWindow _popupWindow;
-    TextView _label;
-    TextView _bottomLine;
-    ViewFlipper _viewFlipper;
 
     @SuppressLint("InflateParams")
     public void showUI() {
@@ -189,13 +188,10 @@ public class SensorGraphNativeActivity extends NativeActivity {
     }
 
     private void handleSliders(View view) {
-        if (view == _popupWindow.getContentView())
-            Log.v(TAG, "VIEWS ARE SAME");
         Log.v(TAG, "slider count=" + 1);
 
         for (Color c : Color.values())
             handleSlider(view, c);
-
     }
 
     @TargetApi(21)
@@ -228,8 +224,6 @@ public class SensorGraphNativeActivity extends NativeActivity {
 
     // create and link the button
     private void handleButtons(View view) {
-        if (view == _popupWindow.getContentView())
-            Log.v(TAG, "VIEWS ARE SAME");
         Log.v(TAG, "button count=" + 1);
 
         // Get a reference to the Press Me Button
@@ -261,6 +255,21 @@ public class SensorGraphNativeActivity extends NativeActivity {
                 _viewFlipper.showPrevious();    // go Back
             }
         });
+
+        // Get a reference to the SHowMAP Button
+        final Button goMapButton = (Button) view.findViewById(R.id.buttonShowMAP);
+        assert (goMapButton != null);
+        goMapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                goMapButton.setText("MAP " + ++count);
+                Log.v(TAG, "switch to mapview ");
+                Intent intent = new Intent(SensorGraphNativeActivity.this, MapViewActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 

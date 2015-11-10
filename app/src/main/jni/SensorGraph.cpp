@@ -17,7 +17,6 @@
 // OpenGL ES 2.0 code
 
 #include <jni.h>
-#include <errno.h>
 #include <sstream>
 #include <iomanip>
 
@@ -28,17 +27,10 @@
 #include <android/asset_manager_jni.h>
 #include <android/log.h>
 #include <android_native_app_glue.h>
-#include <android/native_window_jni.h>
-
-#include <sys/cdefs.h>
-#include <stdint.h>
 
 #include "NDKHelper.h"
 
-#include <cstdint>
 #include <cassert>
-#include <string>
-#include <stdint.h>
 
 #define  LOG_TAG    "sensorgraph"
 //#define  LOGI(...)  __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
@@ -340,9 +332,8 @@ public:
         float fFPS;
         double currentTime = monitor_.GetCurrentTime();
         bool updateViews = UpdateViews();
-        LOGI("DrawFrame", currentTime, updateViews);
+//        LOGI("DrawFrame % %b", currentTime, updateViews);
         if (updateViews) {
-            LOGI("DrawFrame & udpateViews");
             if (monitor_.Update(fFPS)) {
                 UpdateFPS(fFPS);
             }
@@ -585,7 +576,7 @@ public:
 
 
     void ReadSliderValues() {
-        LOGI("ReadSliderValues");
+//        LOGI("ReadSliderValues");
         float colorfade[3];
         for (int i = 0; i < 3; ++i) {
             colorfade[i] = GetProgressValue(i) / 100.f;
